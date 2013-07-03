@@ -22,7 +22,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void MainWindow::Start()
 {
-    this->timer->start(50);
+    this->timer->start(10);
+    if (xCoordinate != 0)
+    {
+        delete(ellipse);
+        xCoordinate = 0;
+        yCoordinate = 0;
+        this->ellipse = new QGraphicsEllipseItem(xCoordinate,yCoordinate, 10, 10);
+    }
     ellipse = PrintRow();
 }
 
@@ -30,7 +37,7 @@ void MainWindow::Increase()
 {
     ++xCoordinate;
     ellipse->setX(this->xCoordinate);
-    yCoordinate = (0.01 * xCoordinate * xCoordinate) - (2*xCoordinate);
+    yCoordinate = (0.01 * xCoordinate * xCoordinate) - (2 * xCoordinate);
     ellipse->setY(this->yCoordinate);
     if (yCoordinate > 30)
         this->timer->stop();
@@ -40,7 +47,7 @@ QGraphicsRectItem * MainWindow::PrintRect()
 {
     QGraphicsRectItem *rect = scene.addRect(0, -18, 40, 20);
     QTransform transform;
-    transform.rotate(130);
+    transform.rotate(127);
     rect->setTransform(transform);
     return rect;
 }
