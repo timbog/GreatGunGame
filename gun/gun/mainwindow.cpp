@@ -12,9 +12,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->graphicsView->setScene(&scene);
     ui->graphicsView->setAlignment(Qt::AlignBottom | Qt::AlignLeft);
     rectan = PrintRect();
-    scene.addEllipse(0,10, 10, 10);
-    this->xCoordinate = -5;
-    this->yCoordinate = -20;
+    this->xCoordinate = 0;
+    this->yCoordinate = 0;
     this->ellipse = new QGraphicsEllipseItem(xCoordinate,yCoordinate, 10, 10);
     this->timer = new QTimer();
     connect(this->timer, SIGNAL(timeout()), this, SLOT(Increase()));
@@ -23,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void MainWindow::Start()
 {
-    this->timer->start(10);
+    this->timer->start(50);
     ellipse = PrintRow();
 }
 
@@ -31,15 +30,17 @@ void MainWindow::Increase()
 {
     ++xCoordinate;
     ellipse->setX(this->xCoordinate);
-     --yCoordinate;
+    yCoordinate = (0.01 * xCoordinate * xCoordinate) - (2*xCoordinate);
     ellipse->setY(this->yCoordinate);
+    if (yCoordinate > 30)
+        this->timer->stop();
 }
 
 QGraphicsRectItem * MainWindow::PrintRect()
 {
-    QGraphicsRectItem *rect = scene.addRect(0, 0, 40, 20);
+    QGraphicsRectItem *rect = scene.addRect(0, -18, 40, 20);
     QTransform transform;
-    transform.rotate(135);
+    transform.rotate(130);
     rect->setTransform(transform);
     return rect;
 }

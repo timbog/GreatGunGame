@@ -17,32 +17,16 @@ public:
 
 public:
     QGraphicsScene scene;
-
-public:
-    int xCoordinate;
-
-public:
-    int yCoordinate;
-
-public:
+    qreal xCoordinate;
+    qreal yCoordinate;
     QTimer *timer;
-
-public:
     QGraphicsRectItem *rectan;
-
-public:
     QGraphicsEllipseItem *ellipse;
 
 public slots:
     QGraphicsRectItem *PrintRect();
-
-public slots:
     QGraphicsEllipseItem *PrintRow();
-
-public slots:
     void Start();
-
-public slots:
     void Increase();
     
 private:
