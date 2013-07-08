@@ -20,14 +20,16 @@ public:
     qreal xCoordinate;
     qreal yCoordinate;
     QTimer *timer;
-    QGraphicsRectItem *rectan;
-    QGraphicsEllipseItem *ellipse;
+    QGraphicsRectItem *gun;
+    QGraphicsEllipseItem *bullet;
+    qreal rotateAngle;
 
 public slots:
     QGraphicsRectItem *PrintRect();
     QGraphicsEllipseItem *PrintRow();
     void Start();
     void Increase();
+    void RotateGun(int angle);
     
 private:
     Ui::MainWindow *ui;
