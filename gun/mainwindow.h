@@ -23,6 +23,8 @@ public:
     QGraphicsRectItem *gun;
     QGraphicsEllipseItem *bullet;
     qreal rotateAngle;
+    qreal time;
+    int speed;
 
 public slots:
     QGraphicsRectItem *PrintRect();
@@ -30,7 +32,8 @@ public slots:
     void Start();
     void Increase();
     void RotateGun(int angle);
-    
+    void SetSpeed(int value);
+
 private:
     Ui::MainWindow *ui;
 };
