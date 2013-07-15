@@ -108,7 +108,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>0</string>
+     <string>Text</string>
     </property>
    </widget>
   </widget>

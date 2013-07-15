@@ -5,6 +5,8 @@
 #include <QGraphicsRectItem>
 #include <QTimer>
 #include <math.h>
+#include <QDebug>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -13,7 +15,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->graphicsView->setScene(&scene);
     ui->graphicsView->setAlignment(Qt::AlignBottom | Qt::AlignLeft);
     gun = PrintRect();
-
     rotateAngle = 0;
     this->time = 0;
     startXCoordinate = 40;
@@ -54,9 +55,11 @@ void MainWindow::Start()
         startXCoordinate = 40;
         startYCoordinate = 10;
     }
-    bullet = new QGraphicsEllipseItem;
-    bullet = PrintRow();
-    ui->label_3->setNum(yCoordinate);
+    bullet = new QGraphicsEllipseItem(0,0, 8, 8);
+    bullet->setPos(startXCoordinate, startYCoordinate);
+    scene.addItem(bullet);
+    //ui->label_3->setNum(startXCoordinate);
+    ui->label_3->setNum(bullet->x());
     this->timer->start(40);
 }
 
@@ -76,6 +79,7 @@ void MainWindow::RotateGun(int angle)
 
 void MainWindow::Increase()
 {
+
     this->time = time + 0.3;
     if (rotateAngle != 90)
         xCoordinate = startXCoordinate + (10 * speed * cos(0.0175 * rotateAngle) * time);
@@ -86,9 +90,11 @@ void MainWindow::Increase()
         time = 0;
         return;
     }
+
     if (rotateAngle != 90)
         bullet->setX(xCoordinate);
     bullet->setY(yCoordinate);
+    //qDebug() << "test" << xCoordinate;
 }
 
 QGraphicsRectItem * MainWindow::PrintRect()
