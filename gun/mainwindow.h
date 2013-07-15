@@ -19,12 +19,14 @@ public:
     QGraphicsScene scene;
     qreal xCoordinate;
     qreal yCoordinate;
+    qreal startXCoordinate;
+    qreal startYCoordinate;
     QTimer *timer;
     QGraphicsRectItem *gun;
     QGraphicsEllipseItem *bullet;
     qreal rotateAngle;
     qreal time;
-    int speed;
+    qreal speed;
 
 public slots:
     QGraphicsRectItem *PrintRect();

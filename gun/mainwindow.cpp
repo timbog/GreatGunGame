@@ -13,10 +13,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->graphicsView->setScene(&scene);
     ui->graphicsView->setAlignment(Qt::AlignBottom | Qt::AlignLeft);
     gun = PrintRect();
+
     rotateAngle = 0;
     this->time = 0;
-    xCoordinate = 40;
-    yCoordinate = 10;
+    startXCoordinate = 40;
+    startYCoordinate = 10;
+    bullet = new QGraphicsEllipseItem(startXCoordinate, startYCoordinate, 10, 10);
     this->timer = new QTimer();
     connect(this->timer, SIGNAL(timeout()), this, SLOT(Increase()));
     connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(Start()));
@@ -37,20 +39,20 @@ void MainWindow::Start()
     delete(bullet);
     if (rotateAngle == 90)
     {
-        xCoordinate = 10;
-        yCoordinate = -40;
+        startXCoordinate = 10;
+        startYCoordinate = -40;
     }
     else if (rotateAngle != 0)
     {
         qreal tempAngle = 0.0175 * (rotateAngle);
         qreal temp = 1 / tan(tempAngle);
-        xCoordinate = ((20 * temp  + 10)/(sqrt(1 + temp * temp))) + 20 * cos(tempAngle);
-        yCoordinate = ((10 * temp - 20)/(sqrt(1 + temp * temp))) - 20 * sin(tempAngle);
+        startXCoordinate = ((20 * temp  + 10)/(sqrt(1 + temp * temp))) + 20 * cos(tempAngle);
+        startYCoordinate = ((10 * temp - 20)/(sqrt(1 + temp * temp))) - 20 * sin(tempAngle);
     }
     else
     {
-        xCoordinate = 40;
-        yCoordinate = 10;
+        startXCoordinate = 40;
+        startYCoordinate = 10;
     }
     bullet = new QGraphicsEllipseItem;
     bullet = PrintRow();
@@ -74,11 +76,11 @@ void MainWindow::RotateGun(int angle)
 
 void MainWindow::Increase()
 {
-    this->time = time + 0.04;
+    this->time = time + 0.3;
     if (rotateAngle != 90)
-        xCoordinate = xCoordinate + (speed * cos(0.0175 * rotateAngle) * time);
-    yCoordinate = yCoordinate - (speed * sin(0.0175 * rotateAngle) * time) + (5 * time * time);
-    if (yCoordinate > 5)
+        xCoordinate = startXCoordinate + (10 * speed * cos(0.0175 * rotateAngle) * time);
+    yCoordinate = startYCoordinate - (10 * speed * sin(0.0175 * rotateAngle) * time) + (5 * time * time);
+    if (yCoordinate >= 10)
     {
         this->timer->stop();
         time = 0;
@@ -87,7 +89,6 @@ void MainWindow::Increase()
     if (rotateAngle != 90)
         bullet->setX(xCoordinate);
     bullet->setY(yCoordinate);
-    //ui->label_3->setNum(bullet->x());
 }
 
 QGraphicsRectItem * MainWindow::PrintRect()
@@ -98,7 +99,7 @@ QGraphicsRectItem * MainWindow::PrintRect()
 
 QGraphicsEllipseItem * MainWindow::PrintRow()
 {
-    QGraphicsEllipseItem *row = scene.addEllipse(this->xCoordinate, this->yCoordinate, 8, 8);
+    QGraphicsEllipseItem *row = scene.addEllipse(this->startXCoordinate, this->startYCoordinate, 8, 8);
     return row;
 }
 
