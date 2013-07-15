@@ -54,7 +54,7 @@ void MainWindow::Start()
     }
     bullet = new QGraphicsEllipseItem;
     bullet = PrintRow();
-    ui->label_3->setNum(bullet->x());
+    ui->label_3->setNum(yCoordinate);
     this->timer->start(40);
 }
 
@@ -87,7 +87,7 @@ void MainWindow::Increase()
     if (rotateAngle != 90)
         bullet->setX(xCoordinate);
     bullet->setY(yCoordinate);
-    ui->label_3->setNum(bullet->x());
+    //ui->label_3->setNum(bullet->x());
 }
 
 QGraphicsRectItem * MainWindow::PrintRect()
