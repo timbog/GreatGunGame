@@ -29,6 +29,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void MainWindow::SetSpeed(int value)
 {
+    if (timer->isActive())
+        return;
     this->speed = value;
     ui->label_2->setNum(speed);
 }
@@ -58,9 +60,7 @@ void MainWindow::Start()
     bullet = new QGraphicsEllipseItem(0,0, 8, 8);
     bullet->setPos(startXCoordinate, startYCoordinate);
     scene.addItem(bullet);
-    //ui->label_3->setNum(startXCoordinate);
-    ui->label_3->setNum(bullet->x());
-    this->timer->start(40);
+    this->timer->start(10);
 }
 
 void MainWindow::RotateGun(int angle)
@@ -70,9 +70,9 @@ void MainWindow::RotateGun(int angle)
     if (angle <= 90)
     {
         QTransform transform;
-        transform.rotate(angle - 90);
+        transform.rotate(360 - angle);
         gun->setTransform(transform);
-        this->rotateAngle = 90 - angle;
+        this->rotateAngle = angle;
         ui->label->setNum(rotateAngle);
     }
 }
@@ -80,7 +80,7 @@ void MainWindow::RotateGun(int angle)
 void MainWindow::Increase()
 {
 
-    this->time = time + 0.3;
+    this->time = time + 0.04;
     if (rotateAngle != 90)
         xCoordinate = startXCoordinate + (10 * speed * cos(0.0175 * rotateAngle) * time);
     yCoordinate = startYCoordinate - (10 * speed * sin(0.0175 * rotateAngle) * time) + (5 * time * time);
@@ -94,7 +94,6 @@ void MainWindow::Increase()
     if (rotateAngle != 90)
         bullet->setX(xCoordinate);
     bullet->setY(yCoordinate);
-    //qDebug() << "test" << xCoordinate;
 }
 
 QGraphicsRectItem * MainWindow::PrintRect()
