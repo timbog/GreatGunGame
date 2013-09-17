@@ -1,6 +1,4 @@
 #pragma once
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
 
 #include <QMainWindow>
 #include <QGraphicsScene>
@@ -10,7 +8,7 @@ namespace Ui {
 class MainWindow;
 }
 
-class MainWindow : public QMainWindow{
+class MainWindow : public QMainWindow {
     Q_OBJECT
     
 public:
@@ -20,14 +18,10 @@ public:
     QGraphicsScene *scene;
 
     // Gun which shoots
-    gun *newGun;
+    Gun *newGun;
 
     // Bullet which flies
-    bullet *newBullet;
-public slots:
-
+    Bullet *newBullet;
 private:
     Ui::MainWindow *ui;
 };
-
-#endif // MAINWINDOW_H

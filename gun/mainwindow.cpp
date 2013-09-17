@@ -9,21 +9,21 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
-{
+    ui(new Ui::MainWindow){
     ui->setupUi(this);
     scene = new QGraphicsScene;
     ui->graphicsView->setScene(scene);
     ui->graphicsView->setAlignment(Qt::AlignBottom | Qt::AlignLeft);
-    newGun = new gun(scene, ui->powerSlider,
-                     ui->angleSlider,
-                     ui->powerLabel,
-                     ui->angleLabel);
-    newBullet = new bullet(scene,
-                           newGun,
-                           ui->fireButton);
+    newGun = new Gun(scene
+        , ui->powerSlider
+        , ui->angleSlider
+        , ui->powerLabel
+        , ui->angleLabel);
+    newBullet = new Bullet(scene
+        ,newGun
+        ,ui->fireButton);
 }
 
-MainWindow::~MainWindow(){
+MainWindow::~MainWindow() {
     delete ui;
 }

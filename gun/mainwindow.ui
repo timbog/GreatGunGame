@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>464</width>
-    <height>310</height>
+    <width>900</width>
+    <height>700</height>
    </rect>
   </property>
   <property name="palette">
@@ -432,11 +432,17 @@
    <widget class="QGraphicsView" name="graphicsView">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>-10</y>
-      <width>441</width>
-      <height>261</height>
+      <x>0</x>
+      <y>0</y>
+      <width>900</width>
+      <height>651</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="palette">
      <palette>
@@ -856,11 +862,14 @@
     <property name="styleSheet">
      <string notr="true"/>
     </property>
+    <property name="resizeAnchor">
+     <enum>QGraphicsView::NoAnchor</enum>
+    </property>
    </widget>
    <widget class="QPushButton" name="fireButton">
     <property name="geometry">
      <rect>
-      <x>370</x>
+      <x>800</x>
       <y>10</y>
       <width>75</width>
       <height>23</height>
@@ -873,8 +882,8 @@
    <widget class="QSlider" name="angleSlider">
     <property name="geometry">
      <rect>
-      <x>410</x>
-      <y>40</y>
+      <x>850</x>
+      <y>50</y>
       <width>20</width>
       <height>71</height>
      </rect>
@@ -898,8 +907,8 @@
    <widget class="QLabel" name="angleLabel">
     <property name="geometry">
      <rect>
-      <x>415</x>
-      <y>120</y>
+      <x>850</x>
+      <y>130</y>
       <width>31</width>
       <height>20</height>
      </rect>
@@ -911,7 +920,7 @@
    <widget class="QSlider" name="powerSlider">
     <property name="geometry">
      <rect>
-      <x>280</x>
+      <x>710</x>
       <y>10</y>
       <width>71</width>
       <height>19</height>
@@ -927,7 +936,7 @@
    <widget class="QLabel" name="powerLabel">
     <property name="geometry">
      <rect>
-      <x>250</x>
+      <x>660</x>
       <y>10</y>
       <width>31</width>
       <height>20</height>
@@ -943,7 +952,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>464</width>
+     <width>900</width>
      <height>21</height>
     </rect>
    </property>

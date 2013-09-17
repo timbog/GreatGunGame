@@ -8,64 +8,66 @@
 
 #include "gun.h"
 
-bullet::bullet(QObject *parent) :
-    QObject(parent){
+Bullet::Bullet(QObject *parent) :
+    QObject(parent) {
 }
 
-bullet::bullet(QGraphicsScene *scene,
-               gun *newGun,
-               QPushButton *fireButton)
+Bullet::Bullet(QGraphicsScene *scene
+        , Gun *newGun
+        , QPushButton *fireButton)
 {
-    this->time = 0;
-    this->scene = scene;
-    this->timer = new QTimer();
-    this->powerGun = newGun;
-    connect(fireButton,
-            SIGNAL(clicked()),
-            this, SLOT(Start()));
-    connect(this->timer,
-            SIGNAL(timeout()),
-            this, SLOT(Fly()));
+    this->mScene = scene;
+    this->mTime = 0;
+    this->mTimer = new QTimer();
+    this->mGun = newGun;
+    connect(fireButton
+        , SIGNAL(clicked())
+        , this
+        , SLOT(start()));
+    connect(this->mTimer
+        , SIGNAL(timeout())
+        , this
+        , SLOT(fly()));
 }
 
-void bullet::Start(){
-    if (powerGun->rotateAngle == 90){
-        startXCoordinate = 10;
-        startYCoordinate = -40;
+void Bullet::start() {
+    if (mGun->rotationAngle() == 90) {
+        mStartXCoordinate = 10;
+        mStartYCoordinate = -40;
     }
-    if ((powerGun->rotateAngle != 0) && (powerGun->rotateAngle != 90)){
-        qreal tempAngle = 0.0175 * (powerGun->rotateAngle);
+    if ((mGun->rotationAngle() != 0) && (mGun->rotationAngle() != 90)) {
+        qreal tempAngle = 0.0175 * (mGun->rotationAngle());
         qreal temp = 1 / tan(tempAngle);
-        startXCoordinate = ((20 * temp  + 10)/(sqrt(1 + temp * temp))) + 20 * cos(tempAngle);
-        startYCoordinate = ((10 * temp - 20)/(sqrt(1 + temp * temp))) - 20 * sin(tempAngle);
+        mStartXCoordinate = ((20 * temp  + 10)/(sqrt(1 + temp * temp))) + 20 * cos(tempAngle);
+        mStartYCoordinate = ((10 * temp - 20)/(sqrt(1 + temp * temp))) - 20 * sin(tempAngle);
     }
-    if (powerGun->rotateAngle == 0){
-        startXCoordinate = 40;
-        startYCoordinate = 10;
+    if (mGun->rotationAngle() == 0) {
+        mStartXCoordinate = 40;
+        mStartYCoordinate = 10;
     }
-    if (this->timer->isActive())
+    if (this->mTimer->isActive())
         return;
-    timer->start(10);
-    delete(this->body);
-    this->body = new QGraphicsEllipseItem(0, 0, 8, 8);
-    this->body->setPos(startXCoordinate,
-                       startYCoordinate);
-    this->scene->addItem(this->body);
+    mTimer->start(10);
+    delete(this->mBody);
+    this->mBody = new QGraphicsEllipseItem(0, 0, 8, 8);
+    this->mBody->setPos(mStartXCoordinate,
+                       mStartYCoordinate);
+    this->mScene->addItem(this->mBody);
 }
 
-void bullet::Fly(){
-    this->time = time + 0.04;
-    if (powerGun->rotateAngle != 90)
-            xCoordinate = startXCoordinate + (10 * powerGun->power * cos(0.0175 * powerGun->rotateAngle) * time);
-    yCoordinate = startYCoordinate - (10 * powerGun->power * sin(0.0175 * powerGun->rotateAngle) * time) + (5 * time * time);
-    if (yCoordinate >= 10){
-        this->timer->stop();
-        time = 0;
+void Bullet::fly() {
+    this->mTime = mTime + 0.04;
+    if (mGun->rotationAngle() != 90)
+            mXCoordinate = mStartXCoordinate + (10 * mGun->powerLevel() * cos(0.0175 * mGun->rotationAngle()) * mTime);
+    mYCoordinate = mStartYCoordinate - (10 * mGun->powerLevel() * sin(0.0175 * mGun->rotationAngle()) * mTime) + (5 * mTime * mTime);
+    if (mYCoordinate >= 10) {
+        this->mTimer->stop();
+        mTime = 0;
         return;
     }
-    if (powerGun->rotateAngle != 90)
-        this->body->setX(xCoordinate);
-    this->body->setY(yCoordinate);
+    if (mGun->rotationAngle() != 90)
+        this->mBody->setX(mXCoordinate);
+    this->mBody->setY(mYCoordinate);
 }
 
 

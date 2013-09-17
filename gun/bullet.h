@@ -1,59 +1,53 @@
 #pragma once
-#ifndef BULLET_H
-#define BULLET_H
 
 #include <QObject>
 #include <QGraphicsScene>
-#include "gun.h"
 #include <QtWidgets/QPushButton>
 #include <QTimer>
 
+class Gun;
+
 // Class which represents a flying bullet
-class bullet : public QObject{
+class Bullet : public QObject {
     Q_OBJECT
 public:
-    explicit bullet(QObject *parent = 0);
+    explicit Bullet(QObject *parent = 0);
 
-    bullet(QGraphicsScene *scene,
-           gun *newGun,
-           QPushButton *fireButton);
-
-    // The bullet itself
-    QGraphicsEllipseItem *body;
-
-    // Scene where the bullet flies
-    QGraphicsScene *scene;
-
-    // Gun from which shot is made
-    gun *powerGun;
-
-    // X coordinate of the bullet
-    qreal xCoordinate;
-
-    // Start X coordinate of the bullet
-    qreal startXCoordinate;
-
-    // Start Y coordinate of the bullet
-    qreal startYCoordinate;
-
-    // Y coordinate of the bullet
-    qreal yCoordinate;
-
-    // Time of the flight
-    qreal time;
-
-    // Timer
-    QTimer *timer;
-
-    
-signals:
-    
+    //Creates a bullet
+    Bullet(QGraphicsScene *scene
+        , Gun *newGun
+        , QPushButton *fireButton);
 public slots:
     // Method which represents start of the flight
-    void Start();
+    void start();
 
     //Method which represents flying process
-    void Fly();    
-};
+    void fly();
+private:
+    // The bullet itself
+    QGraphicsEllipseItem *mBody;
 
-#endif // BULLET_H
+    // Scene where the bullet flies
+    QGraphicsScene *mScene;
+
+    // Gun from which shot is made
+    Gun *mGun;
+
+    // X coordinate of the bullet
+    qreal mXCoordinate;
+
+    // Start X coordinate of the bullet
+    qreal mStartXCoordinate;
+
+    // Start Y coordinate of the bullet
+    qreal mStartYCoordinate;
+
+    // Y coordinate of the bullet
+    qreal mYCoordinate;
+
+    // Time of the flight
+    qreal mTime;
+
+    // Timer
+    QTimer *mTimer;
+};

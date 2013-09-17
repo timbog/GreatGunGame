@@ -4,37 +4,52 @@
 #include <QGraphicsRectItem>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QLabel>
+#include <QGraphicsEffect>
+#include <QPainter>
 
-gun::gun(QObject *parent) :
-    QObject(parent){
+Gun::Gun(QObject *parent) :
+    QObject(parent) {
 }
 
-gun::gun(QGraphicsScene *scene,
-         QSlider *powerSlider,
-         QSlider *angleSlider,
-         QLabel *pLabel,
-         QLabel *aLabel){
-    this->body = scene->addRect(0,0,40,20);
-    this->rotateAngle = 0;
-    this->powerLabel = pLabel;
-    this->angleLabel = aLabel;
-    connect(angleSlider,
-            SIGNAL(sliderMoved(int)),
-            this, SLOT(SetAngle(int)));
-    connect(powerSlider,
-            SIGNAL(sliderMoved(int)),
-            this, SLOT(SetPower(int)));
+Gun::Gun(QGraphicsScene *scene
+        , QSlider *powerSlider
+        , QSlider *angleSlider
+        , QLabel *pLabel
+        , QLabel *aLabel)
+{
+    this->mBody = scene->addRect(0,0,40,20);
+    this->mRotateAngle = 0;
+    this->mPowerLabel = pLabel;
+    this->mAngleLabel = aLabel;
+    connect(angleSlider
+        , SIGNAL(sliderMoved(int))
+        , this
+        , SLOT(setAngle(int)));
+    connect(powerSlider
+        , SIGNAL(sliderMoved(int))
+        , this
+        , SLOT(setPower(int)));
 }
 
-void gun::SetAngle(int angle){
+void Gun::setAngle(int angle) {
     QTransform transform;
     transform.rotate(360 - angle);
-    this->body->setTransform(transform);
-    this->rotateAngle = angle;
-    this->angleLabel->setNum(rotateAngle);
+    this->mBody->setTransform(transform);
+    this->mRotateAngle = angle;
+    this->mAngleLabel->setNum(mRotateAngle);
 }
 
-void gun::SetPower(int value){
-    this->power = value;
-    this->powerLabel->setNum(power);
+void Gun::setPower(int value) {
+    this->mPower = value;
+    this->mPowerLabel->setNum(mPower);
 }
+
+int Gun::rotationAngle() {
+    return this->mRotateAngle;
+}
+
+int Gun::powerLevel() {
+    return this->mPower;
+}
+
+
