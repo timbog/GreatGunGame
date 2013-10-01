@@ -8,20 +8,24 @@ namespace Ui {
 class MainWindow;
 }
 
-class MainWindow : public QMainWindow {
-    Q_OBJECT
-    
+class MainWindow : public QMainWindow
+{
+	Q_OBJECT
 public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
-    // Scene
-    QGraphicsScene *scene;
+	/// Destructor
+	~MainWindow();
 
-    // Gun which shoots
-    Gun *newGun;
+	explicit MainWindow(QWidget *parent = 0);
 
-    // Bullet which flies
-    Bullet *newBullet;
 private:
-    Ui::MainWindow *ui;
+	/// Scene
+	QGraphicsScene *mScene; // Takes ownership
+
+	/// Gun which shoots
+	Gun *mGun; // Takes ownership
+
+	/// Bullet which flies
+	Bullet *mBullet; // Takes ownership
+
+	Ui::MainWindow *mUi; // Takes ownership
 };

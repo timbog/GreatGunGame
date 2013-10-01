@@ -9,7 +9,8 @@
 #include "gun.h"
 
 Bullet::Bullet(QObject *parent) :
-	QObject(parent) {
+	QObject(parent)
+{
 }
 
 Bullet::Bullet(QGraphicsScene *scene
@@ -30,7 +31,8 @@ Bullet::Bullet(QGraphicsScene *scene
 		, SLOT(fly()));
 }
 
-void Bullet::start() {
+void Bullet::start()
+{
 	if (mGun->rotationAngle() == 90) {
 		mStartXCoordinate = 10;
 		mStartYCoordinate = -40;
@@ -55,7 +57,8 @@ void Bullet::start() {
 	this->mScene->addItem(this->mBody);
 }
 
-void Bullet::fly() {
+void Bullet::fly()
+{
 	this->mTime = mTime + 0.04;
 	if (mGun->rotationAngle() != 90)
 			mXCoordinate = mStartXCoordinate + (10 * mGun->powerLevel() * cos(0.0175 * mGun->rotationAngle()) * mTime);
@@ -69,6 +72,15 @@ void Bullet::fly() {
 		this->mBody->setX(mXCoordinate);
 	this->mBody->setY(mYCoordinate);
 }
+
+Bullet::~Bullet()
+{
+	delete this->mBody;
+	delete this->mGun;
+	delete this->mScene;
+	delete this->mTimer;
+}
+
 
 
 

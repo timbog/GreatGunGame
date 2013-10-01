@@ -13,12 +13,13 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
     bullet.cpp \
-    gun.cpp
+    gun.cpp \
+    mainWindow.cpp
 
-HEADERS  += mainwindow.h \
+HEADERS  += \
     bullet.h \
-    gun.h
+    gun.h \
+    mainWindow.h
 
 FORMS    += mainwindow.ui
