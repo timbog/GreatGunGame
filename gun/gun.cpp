@@ -1,14 +1,14 @@
 #include "gun.h"
 
-#include <QGraphicsScene>
-#include <QGraphicsRectItem>
+#include <QtWidgets/QGraphicsScene>
+#include <QtWidgets/QGraphicsRectItem>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QLabel>
-#include <QGraphicsEffect>
-#include <QPainter>
 
-Gun::Gun(QObject *parent) :
-	QObject(parent)
+using namespace gun;
+
+Gun::Gun(QObject *parent)
+	: QObject(parent)
 {
 }
 
@@ -18,7 +18,7 @@ Gun::Gun(QGraphicsScene *scene
 		, QLabel *pLabel
 		, QLabel *aLabel)
 {
-	this->mBody = scene->addRect(0,0,40,20);
+	this->mBody = scene->addRect(0, 0, 40, 20);
 	this->mRotateAngle = 0;
 	this->mPowerLabel = pLabel;
 	this->mAngleLabel = aLabel;

@@ -1,15 +1,18 @@
 #pragma once
 
-#include <QObject>
-#include <QGraphicsScene>
+#include <QtCore/QObject>
+#include <QtWidgets/QGraphicsScene>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QLabel>
+
+namespace gun {
 
 /// Class which represents a gun
 class Gun : public QObject
 {
 	Q_OBJECT
-public:
+
+public slots:
 	/// Method which is needed to set a rotation angle
 	void setAngle(int angle);
 
@@ -22,6 +25,7 @@ public:
 	/// Function which returns power level
 	int powerLevel();
 
+public:
 	/// Destructor
 	~Gun();
 
@@ -50,3 +54,5 @@ private:
 	/// Power of the shot
 	qreal mPower;
 };
+
+}

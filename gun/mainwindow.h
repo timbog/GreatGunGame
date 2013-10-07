@@ -1,16 +1,19 @@
 #pragma once
 
-#include <QMainWindow>
-#include <QGraphicsScene>
+#include <QtWidgets/QMainWindow>
+#include <QtWidgets/QGraphicsScene>
 #include "gun.h"
 #include "bullet.h"
+
 namespace Ui {
 class MainWindow;
 }
 
+namespace gun {
 class MainWindow : public QMainWindow
 {
 	Q_OBJECT
+
 public:
 	/// Destructor
 	~MainWindow();
@@ -29,3 +32,5 @@ private:
 
 	Ui::MainWindow *mUi; // Takes ownership
 };
+
+}

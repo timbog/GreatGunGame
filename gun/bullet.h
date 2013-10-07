@@ -1,9 +1,11 @@
 #pragma once
 
-#include <QObject>
-#include <QGraphicsScene>
+#include <QtCore/QObject>
+#include <QtWidgets/QGraphicsScene>
 #include <QtWidgets/QPushButton>
-#include <QTimer>
+#include <QtCore/QTimer>
+
+namespace gun {
 
 class Gun;
 
@@ -11,13 +13,15 @@ class Gun;
 class Bullet : public QObject
 {
 	Q_OBJECT
-public:
+
+public slots:
 	/// Method which represents start of the flight
 	void start();
 
 	/// Method which represents flying process
 	void fly();
 
+public:
 	/// Destructor
 	~Bullet();
 
@@ -27,7 +31,6 @@ public:
 	Bullet(QGraphicsScene *scene
 		, Gun *newGun
 		, QPushButton *fireButton);
-
 
 private:
 	/// The bullet itself
@@ -57,3 +60,5 @@ private:
 	/// Timer
 	QTimer *mTimer; // Takes ownership
 };
+
+}

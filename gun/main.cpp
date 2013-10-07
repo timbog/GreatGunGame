@@ -1,5 +1,7 @@
-#include "mainwindow.h"
+#include "mainWindow.h"
 #include <QApplication>
+
+using namespace gun;
 
 int main(int argc, char *argv[])
 {
