@@ -65,6 +65,8 @@ void Bullet::start()
 	this->mBody->setPos(mStartXCoordinate,
 		mStartYCoordinate);
 	this->mScene->addItem(this->mBody);
+	const QString newTip = "Bullet";
+	this->mBody->setToolTip(newTip);
 }
 
 void Bullet::fly()
@@ -85,8 +87,9 @@ void Bullet::fly()
 
 	if (mGun->rotationAngle() != 90) {
 		this->mBody->setX(mXCoordinate);
-		this->mBody->setY(mYCoordinate);
 	}
+
+	this->mBody->setY(mYCoordinate);
 
 }
 

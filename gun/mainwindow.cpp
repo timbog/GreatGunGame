@@ -3,6 +3,7 @@
 #include "ui_mainwindow.h"
 #include <QtWidgets/QGraphicsScene>
 #include <QtWidgets/QGraphicsView>
+#include <QtWidgets/QToolTip>
 
 #include "gun.h"
 #include "bullet.h"
@@ -15,8 +16,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
 	mUi->setupUi(this);
 	mScene = new QGraphicsScene;
-	mUi->graphicsView->setScene(mScene);
 	mUi->graphicsView->setAlignment(Qt::AlignBottom | Qt::AlignLeft);
+	mUi->graphicsView->setScene(mScene);
 	mGun = new Gun(mScene
 		, mUi->powerSlider
 		, mUi->angleSlider
@@ -25,6 +26,11 @@ MainWindow::MainWindow(QWidget *parent)
 	mBullet = new Bullet(mScene
 		, mGun
 		, mUi->fireButton);
+	QWidget *window = new QWidget();
+	window->setGeometry(500, 400, 80, 80);
+	QLabel *label = new QLabel(window);
+	label->setText("yes");
+	window->show();
 }
 
 MainWindow::~MainWindow()

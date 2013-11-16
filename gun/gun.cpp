@@ -4,7 +4,7 @@
 #include <QtWidgets/QGraphicsRectItem>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QLabel>
-
+#include<QtWidgets/QToolTip>
 using namespace gun;
 
 Gun::Gun(QObject *parent)
@@ -19,6 +19,8 @@ Gun::Gun(QGraphicsScene *scene
 		, QLabel *aLabel)
 {
 	this->mBody = scene->addRect(0, 0, 40, 20);
+	const QString newTip = "Gun";
+	this->mBody->setToolTip(newTip);
 	this->mRotateAngle = 0;
 	this->mPowerLabel = pLabel;
 	this->mAngleLabel = aLabel;
