@@ -26,11 +26,6 @@ MainWindow::MainWindow(QWidget *parent)
 	mBullet = new Bullet(mScene
 		, mGun
 		, mUi->fireButton);
-	QWidget *window = new QWidget();
-	window->setGeometry(500, 400, 80, 80);
-	QLabel *label = new QLabel(window);
-	label->setText("yes");
-	window->show();
 }
 
 MainWindow::~MainWindow()

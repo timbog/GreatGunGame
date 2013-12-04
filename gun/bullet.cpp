@@ -82,6 +82,14 @@ void Bullet::fly()
 	if (mYCoordinate >= 10) {
 		this->mTimer->stop();
 		mTime = 0;
+		QWidget *window = new QWidget();
+		window->setGeometry(500, 400, 300, 120);
+		QLabel *label = new QLabel(window);
+		label->setText("Good Shot!");
+		window->show();
+		window->setWindowTitle("Congratulations");
+		window->activateWindow();
+		window->raise();
 		return;
 	}
 
